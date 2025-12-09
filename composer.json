@@ -1,0 +1,30 @@
+{
+    "name": "4geo35/price-list",
+    "description": "Price list tree",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir",
+            "email": "aweram-team@yandex.ru"
+        }
+    ],
+    "require": {
+        "4geo35/tailwindcss-theme": "@dev",
+        "4geo35/user-management": "@dev",
+        "4geo35/metable": "@dev",
+        "4geo35/traits-helpers": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "GIS\\PriceList\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GIS\\PriceList\\PriceListServiceProvider"
+            ]
+        }
+    }
+}
