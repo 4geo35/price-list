@@ -17,7 +17,8 @@ use Illuminate\Contracts\Support\CanBeEscapedWhenCastToString;
 use Illuminate\Contracts\Support\Jsonable;
 
 interface PriceListInterface extends Arrayable, ArrayAccess, CanBeEscapedWhenCastToString,
-    HasBroadcastChannel, Jsonable, JsonSerializable, QueueableEntity, Stringable, UrlRoutable, ShouldMetaInterface, ShouldTreeInterface
+    HasBroadcastChannel, Jsonable, JsonSerializable, QueueableEntity, Stringable, UrlRoutable,
+    ShouldMetaInterface, ShouldTreeInterface
 {
     public function parent(): BelongsTo;
     public function children(): HasMany;

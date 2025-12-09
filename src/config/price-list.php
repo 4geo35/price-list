@@ -14,6 +14,12 @@ return [
 
     "customAdminPriceListController" => null,
 
+    // Facades
+    "customPriceListActionsManager" => null,
+
+    // Components
+    "customAminPriceListsListComponent" => null,
+
     // Policy
     "priceListPolicyTitle" => "Управление прайс-листом",
     "priceListPolicy" => \GIS\PriceList\Policies\PriceListPolicy::class,

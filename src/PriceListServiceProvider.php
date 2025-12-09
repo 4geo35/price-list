@@ -2,12 +2,14 @@
 
 namespace GIS\PriceList;
 
+use GIS\PriceList\Helpers\PriceListActionsManager;
 use GIS\PriceList\Interfaces\PriceListInterface;
 use GIS\PriceList\Interfaces\PriceListItemInterface;
 use GIS\PriceList\Models\PriceList;
 use GIS\PriceList\Models\PriceListItem;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use GIS\PriceList\Livewire\Admin\PriceLists\ListWire as AdminPriceListsListWire;
 
 class PriceListServiceProvider extends ServiceProvider
 {
@@ -21,11 +23,16 @@ class PriceListServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__ . '/routes/admin.php');
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+
+        $this->initFacades();
+        $this->bindInterfaces();
     }
 
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'pl');
+
+        $this->addLivewireComponents();
 
         $this->expandConfiguration();
     }
@@ -51,5 +58,22 @@ class PriceListServiceProvider extends ServiceProvider
 
         $priceListItemModelClass = config("price-list.customPriceListItemModel") ?? PriceListItem::class;
         $this->app->bind(PriceListItemInterface::class, $priceListItemModelClass);
+    }
+
+    protected function addLivewireComponents(): void
+    {
+        $component = config("price-list.customAminPriceListsListComponent");
+        Livewire::component(
+            "pl-admin-price-lists-list",
+            $component ?? AdminPriceListsListWire::class
+        );
+    }
+
+    protected function initFacades(): void
+    {
+        $this->app->singleton("price-list-actions", function () {
+            $managerClass = config("price-list.customPriceListActionsManager") ?? PriceListActionsManager::class;
+            return new $managerClass();
+        });
     }
 }
