@@ -4,6 +4,7 @@ return [
     // Web
     "priceListPrefix" => "price-list",
     "priceListPageTitle" => "Прайс-лист",
+    "singlePage" => false,
 
     // Admin
     "customPriceListModel" => null,

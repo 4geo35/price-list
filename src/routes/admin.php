@@ -12,6 +12,6 @@ Route::middleware(["web", "auth", "app-management"])
             ->group(function () {
                 $controllerClass = config("price-list.customAdminPriceListController") ?? PriceListController::class;
                 Route::get("/", [$controllerClass, "index"])->name("index");
-                Route::get("/{list}", [$controllerClass, "show"])->name("show");
+                Route::get("/{category}", [$controllerClass, "show"])->name("show");
             });
     });

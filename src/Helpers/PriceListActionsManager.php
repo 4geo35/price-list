@@ -26,15 +26,6 @@ class PriceListActionsManager
                 "published_at" => null,
             ]);
         }
-
-        $items = $list->items()
-            ->whereNotNull("published_at")
-            ->get();
-        foreach ($items as $item) {
-            $item->update([
-                "published_at" => null,
-            ]);
-        }
     }
 
     public function getPriceListItemIds(PriceListInterface $list, bool $includeSubs = false): array

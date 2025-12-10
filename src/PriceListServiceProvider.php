@@ -7,6 +7,8 @@ use GIS\PriceList\Interfaces\PriceListInterface;
 use GIS\PriceList\Interfaces\PriceListItemInterface;
 use GIS\PriceList\Models\PriceList;
 use GIS\PriceList\Models\PriceListItem;
+use GIS\PriceList\Observers\PriceListObserver;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use GIS\PriceList\Livewire\Admin\PriceLists\ListWire as AdminPriceListsListWire;
@@ -35,6 +37,8 @@ class PriceListServiceProvider extends ServiceProvider
         $this->addLivewireComponents();
 
         $this->expandConfiguration();
+        $this->observeModels();
+        $this->setPolicies();
     }
 
     protected function expandConfiguration(): void
@@ -75,5 +79,17 @@ class PriceListServiceProvider extends ServiceProvider
             $managerClass = config("price-list.customPriceListActionsManager") ?? PriceListActionsManager::class;
             return new $managerClass();
         });
+    }
+
+    protected function observeModels(): void
+    {
+        $modelClass = config("price-list.customPriceListModel") ?? PriceList::class;
+        $observerClass = config("price-list.customPriceListObserver") ?? PriceListObserver::class;
+        $modelClass::observe($observerClass);
+    }
+
+    protected function setPolicies(): void
+    {
+        Gate::policy(config("price-list.customPriceListModel") ?? PriceList::class, config("price-list.priceListPolicy"));
     }
 }

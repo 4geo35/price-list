@@ -16,6 +16,17 @@ class PriceList extends Model implements PriceListInterface
 {
     use ShouldSlug, ShouldMeta, ShouldMarkdown, ShouldTree, ShouldHumanDate, ShouldHumanPublishDate;
 
+    protected $fillable = [
+        "title",
+        "slug",
+        "short",
+        "accent",
+        "description",
+        "info",
+        "show_nested",
+        "published_at",
+    ];
+
     public function items(): HasMany
     {
         $priceListItemModelClass = config("price-list.customPriceListItemModel") ?? PriceListItem::class;

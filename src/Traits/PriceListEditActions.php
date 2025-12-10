@@ -28,7 +28,7 @@ trait PriceListEditActions
         if ($this->priceListId) { $uniqueCondition .= " ,{$this->priceListId}"; }
         return [
             "title" => ["required", "string", "max:250"],
-            "slug" => ["required", "string", "max:250", $uniqueCondition],
+            "slug" => ["nullable", "string", "max:250", $uniqueCondition],
             "short" => ["nullable", "string", "max:250"],
             "accent" => ["nullable", "string", "max:250"],
         ];

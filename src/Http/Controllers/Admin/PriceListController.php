@@ -17,10 +17,11 @@ class PriceListController extends Controller
         return view("pl::admin.price-lists.index");
     }
 
-    public function show(PriceListInterface $list): View
+    public function show(PriceListInterface $category): View
     {
         $priceListModelClass = config("price-list.customPriceListModel") ?? PriceList::class;
         Gate::authorize("viewAny", $priceListModelClass);
+        $list = $category;
         return view("pl::admin.price-lists.show", compact("list"));
     }
 }
