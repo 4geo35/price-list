@@ -20,6 +20,7 @@ return [
 
     // Components
     "customAminPriceListsListComponent" => null,
+    "customAdminPriceListShowComponent" => null,
 
     // Policy
     "priceListPolicyTitle" => "Управление прайс-листом",

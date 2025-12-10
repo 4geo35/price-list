@@ -21,7 +21,7 @@ class PriceListController extends Controller
     {
         $priceListModelClass = config("price-list.customPriceListModel") ?? PriceList::class;
         Gate::authorize("viewAny", $priceListModelClass);
-        $list = $category;
-        return view("pl::admin.price-lists.show", compact("list"));
+        $priceList = $category;
+        return view("pl::admin.price-lists.show", compact("priceList"));
     }
 }

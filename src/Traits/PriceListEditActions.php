@@ -25,7 +25,7 @@ trait PriceListEditActions
     public function rules(): array
     {
         $uniqueCondition = "unique:price_lists,slug";
-        if ($this->priceListId) { $uniqueCondition .= " ,{$this->priceListId}"; }
+        if ($this->priceListId) { $uniqueCondition .= ",{$this->priceListId}"; }
         return [
             "title" => ["required", "string", "max:250"],
             "slug" => ["nullable", "string", "max:250", $uniqueCondition],
@@ -90,7 +90,7 @@ trait PriceListEditActions
         if (isset($this->priceList)) {
             $this->priceList = $priceList;
             if ($slugHasChanged) {
-                $this->redirectRoute("admin.price-lists.show", ["list" => $this->priceList]);
+                $this->redirectRoute("admin.price-lists.show", ["category" => $this->priceList]);
             }
         }
     }

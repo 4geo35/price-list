@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use GIS\PriceList\Livewire\Admin\PriceLists\ListWire as AdminPriceListsListWire;
+use GIS\PriceList\Livewire\Admin\PriceLists\ShowWire as AdminPriceListShowWire;
 
 class PriceListServiceProvider extends ServiceProvider
 {
@@ -70,6 +71,12 @@ class PriceListServiceProvider extends ServiceProvider
         Livewire::component(
             "pl-admin-price-lists-list",
             $component ?? AdminPriceListsListWire::class
+        );
+
+        $component = config("price-list.customAdminPriceListShowComponent");
+        Livewire::component(
+            "pl-admin-price-list-show",
+            $component ?? AdminPriceListShowWire::class
         );
     }
 

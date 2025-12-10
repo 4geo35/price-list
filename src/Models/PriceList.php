@@ -11,6 +11,7 @@ use GIS\TraitsHelpers\Traits\ShouldSlug;
 use GIS\TraitsHelpers\Traits\ShouldTree;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class PriceList extends Model implements PriceListInterface
 {
@@ -31,5 +32,12 @@ class PriceList extends Model implements PriceListInterface
     {
         $priceListItemModelClass = config("price-list.customPriceListItemModel") ?? PriceListItem::class;
         return $this->hasMany($priceListItemModelClass, "price_list_id");
+    }
+
+    public function getInfoMarkdownAttribute(): ?string
+    {
+        $value = $this->info;
+        if (! $value) return $value;
+        return Str::markdown($value);
     }
 }
