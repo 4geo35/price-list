@@ -7,12 +7,14 @@ use GIS\PriceList\Interfaces\PriceListInterface;
 use GIS\PriceList\Interfaces\PriceListItemInterface;
 use GIS\PriceList\Models\PriceList;
 use GIS\PriceList\Models\PriceListItem;
+use GIS\PriceList\Observers\PriceListItemObserver;
 use GIS\PriceList\Observers\PriceListObserver;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use GIS\PriceList\Livewire\Admin\PriceLists\ListWire as AdminPriceListsListWire;
 use GIS\PriceList\Livewire\Admin\PriceLists\ShowWire as AdminPriceListShowWire;
+use GIS\PriceList\Livewire\Admin\PriceListItems\ListWire as AdminPriceListItemsListWire;
 
 class PriceListServiceProvider extends ServiceProvider
 {
@@ -78,6 +80,12 @@ class PriceListServiceProvider extends ServiceProvider
             "pl-admin-price-list-show",
             $component ?? AdminPriceListShowWire::class
         );
+
+        $component = config("price-list.customPriceListItemsListComponent");
+        Livewire::component(
+            "pl-admin-price-list-items",
+            $component ?? AdminPriceListItemsListWire::class
+        );
     }
 
     protected function initFacades(): void
@@ -92,6 +100,10 @@ class PriceListServiceProvider extends ServiceProvider
     {
         $modelClass = config("price-list.customPriceListModel") ?? PriceList::class;
         $observerClass = config("price-list.customPriceListObserver") ?? PriceListObserver::class;
+        $modelClass::observe($observerClass);
+
+        $modelClass = config("price-list.customPriceListItemModel") ?? PriceListItem::class;
+        $observerClass = config("price-list.customPriceListItemModelObserver") ?? PriceListItemObserver::class;
         $modelClass::observe($observerClass);
     }
 

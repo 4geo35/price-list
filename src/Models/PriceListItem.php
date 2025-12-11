@@ -2,12 +2,21 @@
 
 namespace GIS\PriceList\Models;
 
+use GIS\Fileable\Traits\ShouldImage;
 use GIS\PriceList\Interfaces\PriceListItemInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PriceListItem extends Model implements PriceListItemInterface
 {
+    use ShouldImage;
+
+    protected $fillable = [
+        "title",
+        "price",
+        "short",
+    ];
+
     public function priceList(): BelongsTo
     {
         $priceListModelClass = config("price-list.customPriceListModel") ?? PriceList::class;
