@@ -43,15 +43,17 @@
                 <x-tt::form.error name="short"/>
             </div>
 
-            <div>
-                <label for="itemCover" class="inline-block mb-2">Изображение</label>
-                <input type="file" id="itemCover"
-                       class="form-control {{ $errors->has('cover') ? 'border-danger' : '' }}"
-                       wire:loading.attr="disabled"
-                       wire:model.lazy="cover">
-                <x-tt::form.error name="cover"/>
-                @include("tt::admin.delete-image-button")
-            </div>
+            @if (config("price-list.useImages"))
+                <div>
+                    <label for="itemCover" class="inline-block mb-2">Изображение</label>
+                    <input type="file" id="itemCover"
+                           class="form-control {{ $errors->has('cover') ? 'border-danger' : '' }}"
+                           wire:loading.attr="disabled"
+                           wire:model.lazy="cover">
+                    <x-tt::form.error name="cover"/>
+                    @include("tt::admin.delete-image-button")
+                </div>
+            @endif
 
             <div class="flex items-center space-x-indent-half">
                 <button type="button" class="btn btn-outline-dark" wire:click="closeData">

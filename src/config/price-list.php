@@ -5,7 +5,7 @@ return [
     "priceListPrefix" => "price-list",
     "priceListPageTitle" => "Прайс-лист",
     "singlePage" => false,
-    "useImages" => true,
+    "useImages" => false,
 
     // Admin
     "customPriceListModel" => null,
