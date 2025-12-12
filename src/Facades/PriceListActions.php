@@ -7,6 +7,9 @@ use GIS\PriceList\Interfaces\PriceListInterface;
 use Illuminate\Support\Facades\Facade;
 
 /**
+ * @method static PriceListInterface findNestedChild(PriceListInterface $priceList)
+ * @method static PriceListInterface|null findRootNested(PriceListInterface $priceList)
+ *
  * @method static array getCategoryTree(array $newOrder = null)
  * @method static bool rebuildTree(array $newOrder)
  *

@@ -4,8 +4,12 @@ return [
     // Web
     "priceListPrefix" => "price-list",
     "priceListPageTitle" => "Прайс-лист",
+    "useBreadcrumbs" => true,
+    "useH1" => true,
     "singlePage" => false,
     "useImages" => false,
+
+    "customWebPriceListController" => null,
 
     // Admin
     "customPriceListModel" => null,
@@ -22,6 +26,9 @@ return [
     // Components
     "customAminPriceListsListComponent" => null,
     "customAdminPriceListShowComponent" => null,
+
+    // Blade components
+    "customWebTreeSidebarComponent" => null,
 
     // Policy
     "priceListPolicyTitle" => "Управление прайс-листом",

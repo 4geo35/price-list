@@ -9,6 +9,8 @@ use GIS\PriceList\Models\PriceList;
 use GIS\PriceList\Models\PriceListItem;
 use GIS\PriceList\Observers\PriceListItemObserver;
 use GIS\PriceList\Observers\PriceListObserver;
+use GIS\PriceList\View\Components\TreeSidebarComponent;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -37,11 +39,12 @@ class PriceListServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'pl');
 
-        $this->addLivewireComponents();
-
         $this->expandConfiguration();
         $this->observeModels();
         $this->setPolicies();
+
+        $this->addLivewireComponents();
+        $this->addBladeComponents();
     }
 
     protected function expandConfiguration(): void
@@ -110,5 +113,11 @@ class PriceListServiceProvider extends ServiceProvider
     protected function setPolicies(): void
     {
         Gate::policy(config("price-list.customPriceListModel") ?? PriceList::class, config("price-list.priceListPolicy"));
+    }
+
+    protected function addBladeComponents(): void
+    {
+        $component = config("price-list.customWebTreeSidebarComponent") ?? TreeSidebarComponent::class;
+        Blade::component("pl-tree-sidebar", $component);
     }
 }

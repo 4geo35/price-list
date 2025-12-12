@@ -18,6 +18,24 @@ class PriceListActionsManager
         $this->hasImage = false;
     }
 
+    public function findNestedChild(PriceListInterface $priceList): PriceListInterface
+    {
+        $firstChild = $priceList->children()->whereNotNull("published_at")->orderBy("priority")->first();
+        if (! $firstChild) { return $priceList; }
+        if ($firstChild->show_nested) { return $firstChild; }
+        return $this->findNestedChild($firstChild);
+    }
+
+    public function findRootNested(PriceListInterface $priceList): ?PriceListInterface
+    {
+        $parent = $priceList->parent;
+        if (! $parent) { return null; }
+        $check = $this->findRootNested($parent);
+        if (! $parent->show_nested && ! $check) { return null; }
+        if (! $check) { return $parent; }
+        return $check;
+    }
+
     public function cascadeShutdown(PriceListInterface $list): void
     {
         foreach ($list->children as $child) {
@@ -76,5 +94,11 @@ class PriceListActionsManager
     protected function expandItemData(&$data, ShouldTreeInterface $category): void
     {
         $data["published_at"] = $category->published_at ?? null;
+        $showNested = (bool)$category->show_nested;
+        $data["show_nested"] = $showNested;
+        $data["webTitle"] = $data["title"];
+        if ($showNested) {
+            $data["title"] .= " (Раскрыто)";
+        }
     }
 }

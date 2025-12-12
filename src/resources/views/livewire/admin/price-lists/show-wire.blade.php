@@ -31,6 +31,13 @@
                         <div class="col w-full xs:w-3/5">{{ $priceList->accent }}</div>
                     </div>
 
+                    <div class="row">
+                        <div class="col w-full xs:w-2/5 mb-indent-half xs:mb-0">
+                            <h3 class="font-semibold">Раскрывать вложенные</h3>
+                        </div>
+                        <div class="col w-full xs:w-3/5">{{ $priceList->show_nested ? "Да" : "Нет" }}</div>
+                    </div>
+
                     @if ($priceList->children->count())
                         <div class="row">
                             <div class="col w-full xs:w-2/5 mb-indent-half xs:mb-0">
@@ -38,7 +45,7 @@
                             </div>
                             <div class="col w-full xs:w-3/5">
                                 <ul>
-                                    @foreach($priceList->children as $child)
+                                    @foreach($priceList->children()->orderBy("priority")->get() as $child)
                                         <li class="py-1">
                                             <a href="{{ route("admin.price-lists.show", ['category' => $child]) }}"
                                                class="text-primary hover:text-primary-hover">
