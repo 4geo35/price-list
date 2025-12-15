@@ -46,17 +46,6 @@
             </div>
 
             <div>
-                <label for="accent" class="inline-block mb-2">
-                    Акцент
-                </label>
-                <input type="text" id="accent"
-                       class="form-control {{ $errors->has("accent") ? "border-danger" : "" }}"
-                       wire:loading.attr="disabled"
-                       wire:model="accent">
-                <x-tt::form.error name="accent"/>
-            </div>
-
-            <div>
                 <label for="description" class="flex justify-start items-center mb-2">
                     Описание
                     @include("tt::admin.description-button")
@@ -73,6 +62,17 @@
                 <div class="prose prose-sm mt-indent-half">
                     {!! \Illuminate\Support\Str::markdown($description) !!}
                 </div>
+            </div>
+
+            <div>
+                <label for="accent" class="inline-block mb-2">
+                    Акцент
+                </label>
+                <input type="text" id="accent"
+                       class="form-control {{ $errors->has("accent") ? "border-danger" : "" }}"
+                       wire:loading.attr="disabled"
+                       wire:model="accent">
+                <x-tt::form.error name="accent"/>
             </div>
 
             <div>

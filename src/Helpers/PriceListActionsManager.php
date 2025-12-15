@@ -18,6 +18,20 @@ class PriceListActionsManager
         $this->hasImage = false;
     }
 
+    public function buildPriceTree(PriceListInterface $priceList = null): array
+    {
+        list($items, $roots) = $this->makeRawPriceListDataWithPrices($priceList);
+
+        $grouped = $this->splitByParents($items);
+        $tree = [];
+        foreach ($roots as $id) {
+            $item = $items[$id];
+            $this->addChildren($item, $grouped);
+            $tree[$id] = $item;
+        }
+        return $this->sortByPriority($tree);
+    }
+
     public function findNestedChild(PriceListInterface $priceList): PriceListInterface
     {
         $firstChild = $priceList->children()->whereNotNull("published_at")->orderBy("priority")->first();
@@ -100,5 +114,35 @@ class PriceListActionsManager
         if ($showNested) {
             $data["title"] .= " (Раскрыто)";
         }
+    }
+
+    protected function makeRawPriceListDataWithPrices(PriceListInterface $priceList = null)
+    {
+        $query = $this->modelClass::query();
+        $query->with(["items" => function ($query) {
+            $query->orderBy("priority");
+        }]);
+        if ($priceList) {
+            $ids = $this->getChildrenIds($priceList, true);
+            $query->whereIn("id", $ids);
+        }
+        $categories = $query->orderBy("parent_id")->get();
+
+        $items = [];
+        $roots = [];
+        if ($priceList && $priceList->parent_id) { $roots[] = $priceList->id; }
+        foreach ($categories as $category) {
+            $data = [
+                "model" => $category,
+                "parent" => $category->parent_id,
+                "priority" => $category->priority,
+                "id" => $category->id,
+                "children" => [],
+                "items" => $category->items,
+            ];
+            $items[$category->id] = $data;
+            if (empty($category->parent_id)) { $roots[] = $category->id; }
+        }
+        return [$items, $roots];
     }
 }

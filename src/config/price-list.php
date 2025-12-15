@@ -8,6 +8,10 @@ return [
     "useH1" => true,
     "singlePage" => false,
     "useImages" => false,
+    "useTableHeader" => true,
+    "tableListTitle" => "Наименование услуги",
+    "tablePriceTitle" => "Цена",
+    "addToHeaderSize" => 2,
 
     "customWebPriceListController" => null,
 

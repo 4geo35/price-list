@@ -48,6 +48,13 @@ class PriceListController
 
         $metas = MetaActions::renderByModel($priceList);
         $parents = PriceListActions::getParents($priceList);
-        return view("pl::web.price-lists.show", compact("priceList", "metas", "parents"));
+
+        $renderPriceTree = $priceList->show_nested || !$priceList->children()->select("id")->count();
+
+        if ($renderPriceTree) { $tree = PriceListActions::buildPriceTree($priceList); }
+        else { $tree = $priceList->children()->select("id", "title", "slug")->get(); }
+
+        debugbar()->info($tree);
+        return view("pl::web.price-lists.show", compact("priceList", "metas", "parents", "tree", "renderPriceTree"));
     }
 }
