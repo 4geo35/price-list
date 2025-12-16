@@ -7,7 +7,7 @@
     @if ($child["hasChildren"])
         <li x-data="{ expanded: '{{ $useAnchors ? true : $child['expanded'] }}' }" class="">
             <button type="button" @click="expanded = !expanded"
-                    class="w-full flex items-center justify-between cursor-pointer {{ $sizeClasses }} hover:text-primary-hover {{ $child['isActive'] ? 'text-primary' : '' }}">
+                    class="w-full flex items-center justify-between text-left cursor-pointer {{ $sizeClasses }} hover:text-primary-hover {{ $child['isActive'] ? 'text-primary' : '' }}">
                 <span>{{ $child["webTitle"] }}</span>
                 <span class="transition-all" :class="expanded ? 'rotate-180' : ''">
                     <x-tt::ico.arrow-down />

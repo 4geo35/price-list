@@ -16,7 +16,9 @@ class PriceListController
         if (config("price-list.singlePage")) {
             $metas = MetaActions::renderByPage(config("price-list.priceListPrefix"));
 
-            return view("pl::web.price-lists.index", compact("metas"));
+            $tree = PriceListActions::buildPriceTree();
+            debugbar()->info($tree);
+            return view("pl::web.price-lists.index", compact("metas", "tree"));
         } else {
             $modelClass = config("price-list.customPriceListModel") ?? PriceList::class;
             $priceList = $modelClass::query()
@@ -54,7 +56,6 @@ class PriceListController
         if ($renderPriceTree) { $tree = PriceListActions::buildPriceTree($priceList); }
         else { $tree = $priceList->children()->select("id", "title", "slug")->get(); }
 
-        debugbar()->info($tree);
         return view("pl::web.price-lists.show", compact("priceList", "metas", "parents", "tree", "renderPriceTree"));
     }
 }

@@ -4,7 +4,7 @@
 
 <div class="row">
     @foreach($children as $child)
-        <div class="col w-1/2 mb-indent">
+        <div class="col w-full md:w-1/2 lg:w-full xl:w-1/2 mb-indent">
             <a href="{{ route('web.price-lists.show', ['priceList' => $child]) }}"
                class="h-full flex items-center justify-center text-center p-indent-half border border-primary rounded-base bg-primary/20 hover:bg-primary/30 font-semibold text-lg">
                 {{ $child->title }}

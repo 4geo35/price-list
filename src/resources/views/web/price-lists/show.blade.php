@@ -4,10 +4,10 @@
 
     <div class="container">
         <div class="row">
-            <div class="col w-1/3">
+            <div class="col w-full lg:w-1/3 order-last lg:order-first mb-indent">
                 <x-pl-tree-sidebar :$priceList :$parents />
             </div>
-            <div class="col w-2/3">
+            <div class="col w-full lg:w-2/3 mb-indent">
                 <x-tt::h1 class="mb-indent">{{ $priceList->title }}</x-tt::h1>
 
                 @if ($renderPriceTree)

@@ -44,7 +44,7 @@ class TreeSidebarComponent extends Component
             if (!$item["published_at"]) {
                 unset($tree[$key]);
             }
-            if ($item["show_nested"]) {
+            if ($item["show_nested"] && ! config("price-list.singlePage")) {
                 $item["children"] = [];
             } else {
                 $item["children"] = $this->checkTree($item["children"]);
