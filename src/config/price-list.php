@@ -7,7 +7,7 @@ return [
     "useBreadcrumbs" => true,
     "useH1" => true,
     "singlePage" => false, // Если включить, то лучше поставить addToHeaderSize в значение 1
-    "useImages" => false,
+    "useImages" => true,
     "useTableHeader" => true,
     "tableListTitle" => "Наименование услуги",
     "tablePriceTitle" => "Цена",
@@ -39,4 +39,11 @@ return [
     "priceListPolicyTitle" => "Управление прайс-листом",
     "priceListPolicy" => \GIS\PriceList\Policies\PriceListPolicy::class,
     "priceListPolicyKey" => "price_lists",
+
+    // Templates
+    "templates" => [
+        "price-list-item-teaser" => \GIS\PriceList\Templates\PriceTeaser::class,
+        "tablet-price-list-item-teaser" => \GIS\PriceList\Templates\TabletPriceTeaser::class,
+        "mobile-price-list-item-teaser" => \GIS\PriceList\Templates\MobilePriceTeaser::class,
+    ]
 ];

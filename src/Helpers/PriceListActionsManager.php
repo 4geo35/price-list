@@ -116,10 +116,13 @@ class PriceListActionsManager
         }
     }
 
-    protected function makeRawPriceListDataWithPrices(PriceListInterface $priceList = null)
+    protected function makeRawPriceListDataWithPrices(PriceListInterface $priceList = null): array
     {
         $query = $this->modelClass::query();
         $query->with(["items" => function ($query) {
+            if (config("price-list.useImages")) {
+                $query->with("image");
+            }
             $query->orderBy("priority");
         }]);
         if ($priceList) {

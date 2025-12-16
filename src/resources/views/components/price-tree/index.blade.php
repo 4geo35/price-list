@@ -17,9 +17,17 @@
 
             @include("pl::web.price-lists.includes.short", ["model" => $model])
 
-            @foreach($treeItem["items"] as $key => $item)
-                <x-pl::price-tree.item :$item :$key />
-            @endforeach
+            @if (config('price-list.useImages'))
+                <div class="row">
+                    @foreach($treeItem["items"] as $key => $item)
+                        <x-pl::price-tree.image-item :$item />
+                    @endforeach
+                </div>
+            @else
+                @foreach($treeItem["items"] as $key => $item)
+                    <x-pl::price-tree.item :$item :$key />
+                @endforeach
+            @endif
 
             @include("pl::web.price-lists.includes.description", ["model" => $model])
             @include("pl::web.price-lists.includes.info", ["model" => $model])

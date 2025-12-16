@@ -2,6 +2,7 @@
 
 namespace GIS\PriceList;
 
+use GIS\Fileable\Traits\ExpandTemplatesTrait;
 use GIS\PriceList\Helpers\PriceListActionsManager;
 use GIS\PriceList\Interfaces\PriceListInterface;
 use GIS\PriceList\Interfaces\PriceListItemInterface;
@@ -20,6 +21,8 @@ use GIS\PriceList\Livewire\Admin\PriceListItems\ListWire as AdminPriceListItemsL
 
 class PriceListServiceProvider extends ServiceProvider
 {
+    use ExpandTemplatesTrait;
+
     public function register(): void
     {
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
@@ -50,6 +53,7 @@ class PriceListServiceProvider extends ServiceProvider
     protected function expandConfiguration(): void
     {
         $pl = app()->config["price-list"];
+        $this->expandTemplates($pl);
 
         $um = app()->config["user-management"];
         $permissions = $um["permissions"];
