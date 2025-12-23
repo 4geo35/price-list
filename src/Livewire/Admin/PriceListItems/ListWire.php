@@ -115,6 +115,7 @@ class ListWire extends Component
         $item = $this->findModel();
         if (! $item) { return; }
         if (! $this->checkAuth()) { return; }
+        $this->validate();
 
         $item->update([
             "title" => $this->title,
