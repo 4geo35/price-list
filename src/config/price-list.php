@@ -6,7 +6,7 @@ return [
     "priceListPageTitle" => "Прайс-лист",
     "useBreadcrumbs" => true,
     "useH1" => true,
-    "singlePage" => true, // Если включить, то лучше поставить addToHeaderSize в значение 1
+    "singlePage" => false, // Если включить, то лучше поставить addToHeaderSize в значение 1
     "useImages" => false,
     "useTableHeader" => true,
     "tableListTitle" => "Наименование услуги",
