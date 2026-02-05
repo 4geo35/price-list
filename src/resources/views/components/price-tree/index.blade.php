@@ -2,7 +2,7 @@
 <div>
     @foreach($tree as $treeItem)
         @php($model = $treeItem["model"])
-        <div class="my-indent-half">
+        <div class="mb-indent-lg">
             @if ($depth > 0 || config("price-list.singlePage"))
                 @php($addToHeaderSize = config("price-list.addToHeaderSize"))
                 @php($headerSize = $depth <= 3 ? $depth + $addToHeaderSize : 3 + $addToHeaderSize)
@@ -10,7 +10,7 @@
                 @php($headerClass = $depth <= 2 ? "mb-indent" : "mb-indent-half")
                 <x-dynamic-component :component="$headerComponent"
                                      id="list-{{ $model->slug }}"
-                                     class="{{ $headerClass }} pb-2 border-b border-stroke">
+                                     class="{{ $headerClass }}">
                     {{ $model->title }}
                 </x-dynamic-component>
             @endif
