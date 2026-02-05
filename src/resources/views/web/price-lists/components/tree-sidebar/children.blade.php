@@ -1,6 +1,10 @@
 @props(["tree", "depth"])
 @php
-    $sizeClasses = $depth <= 0 ? 'text-lg font-semibold' : ''; // TODO: change size for more depth
+    $sizeClasses = $depth <= 0 ? 'text-lg font-semibold' : '';
+    $spacingClasses = match ($depth) {
+        0 => "pt-indent-sm space-y-indent-sm",
+        default => "pt-indent-xs space-y-indent-xs",
+    };
 @endphp
 
 @foreach($tree as $child)
@@ -13,7 +17,7 @@
                     <x-tt::ico.arrow-down />
                 </span>
             </button>
-            <ul x-collapse x-show="expanded" class="ml-indent-half mb-2">
+            <ul x-collapse x-show="expanded" class="ml-5 {{ $spacingClasses }}">
                 @include("pl::web.price-lists.components.tree-sidebar.children", ["tree" => $child["children"], "depth" => $depth + 1])
             </ul>
         </li>

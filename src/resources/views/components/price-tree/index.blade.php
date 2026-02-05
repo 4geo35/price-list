@@ -17,16 +17,21 @@
 
             @include("pl::web.price-lists.includes.short", ["model" => $model])
 
-            @if (config('price-list.useImages'))
-                <div class="row">
-                    @foreach($treeItem["items"] as $key => $item)
-                        <x-pl::price-tree.image-item :$item />
-                    @endforeach
-                </div>
-            @else
-                @foreach($treeItem["items"] as $key => $item)
-                    <x-pl::price-tree.item :$item :$key />
-                @endforeach
+            @if(count($treeItem["items"]))
+                @if (config('price-list.useImages'))
+                    <div class="row mb-indent-half">
+                        @foreach($treeItem["items"] as $key => $item)
+                            <x-pl::price-tree.image-item :$item />
+                        @endforeach
+                    </div>
+                @else
+                    <div class="border border-stroke rounded-base overflow-hidden mb-indent-half">
+                        @include("pl::web.price-lists.includes.table-header")
+                        @foreach($treeItem["items"] as $key => $item)
+                            <x-pl::price-tree.item :$item :$key :is-last="$loop->last" />
+                        @endforeach
+                    </div>
+                @endif
             @endif
 
             @include("pl::web.price-lists.includes.description", ["model" => $model])

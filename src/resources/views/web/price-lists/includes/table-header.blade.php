@@ -1,6 +1,14 @@
-@if (config("price-list.useTableHeader") && !config("price-list.useImages"))
-    <div class="mb-indent flex items-center justify-between rounded-base bg-primary/25 font-semibold text-lg p-indent-half">
-        <div>{{ config('price-list.tableListTitle') }}</div>
-        <div>{{ config('price-list.tablePriceTitle') }}</div>
+@if (config("price-list.useTableHeader"))
+    <div class="row text-white text-lg font-semibold border-b border-stroke bg-body">
+        <div class="col w-full md:w-2/3">
+            <div class="ml-5 my-indent-xs">
+                {{ config('price-list.tableListTitle') }}
+            </div>
+        </div>
+        <div class="col w-full md:w-1/3">
+            <div class="ml-5 my-indent-xs">
+                {{ config('price-list.tablePriceTitle') }}
+            </div>
+        </div>
     </div>
 @endif
