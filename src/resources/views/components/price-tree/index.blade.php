@@ -19,7 +19,7 @@
 
             @if(count($treeItem["items"]))
                 @if (config('price-list.useImages'))
-                    <div class="row mb-indent-half">
+                    <div class="row mb-indent-half -mx-2">
                         @foreach($treeItem["items"] as $key => $item)
                             <x-pl::price-tree.image-item :$item />
                         @endforeach

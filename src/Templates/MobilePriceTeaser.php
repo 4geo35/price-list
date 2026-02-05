@@ -10,6 +10,6 @@ class MobilePriceTeaser implements ModifierInterface
 {
     public function apply(ImageInterface $image): ImageInterface
     {
-        return $image->cover(455, 410);
+        return $image->cover(433, 433);
     }
 }
