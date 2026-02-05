@@ -43,7 +43,7 @@ class PriceListActionsManager
         }
     }
 
-    protected function expandRawDataQueryWith(Builder $query, ShouldTreeInterface $item): void
+    protected function expandRawDataQueryWith(Builder $query, ShouldTreeInterface $item = null): void
     {
         $query->with(["items" => function ($query) {
             if (config("price-list.useImages")) {
