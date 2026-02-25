@@ -27,12 +27,7 @@ class PriceListServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
-        $this->mergeConfigFrom(
-            __DIR__ . '/config/price-list.php', 'price-list'
-        );
-
-        $this->loadRoutesFrom(__DIR__ . '/routes/admin.php');
-        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        $this->mergeConfigFrom(__DIR__ . '/config/price-list.php', 'price-list');
 
         $this->initFacades();
         $this->bindInterfaces();
@@ -41,6 +36,9 @@ class PriceListServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'pl');
+
+        $this->loadRoutesFrom(__DIR__ . '/routes/admin.php');
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
 
         $this->expandConfiguration();
         $this->observeModels();
