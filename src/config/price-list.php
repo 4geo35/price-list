@@ -12,7 +12,6 @@ return [
     "tableListTitle" => "Наименование услуги",
     "tablePriceTitle" => "Цена",
     "addToHeaderSize" => 2,
-    "stickySidebarPosition" => "top-0",
 
     "customWebPriceListController" => null,
 

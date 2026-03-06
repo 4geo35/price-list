@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col w-full lg:w-1/3 order-last lg:order-first mb-indent">
-                <div class="sticky {{ config('price-list.stickySidebarPosition') }} lg:max-h-dvh overflow-y-auto beautify-scrollbar">
+                <div class="sticky top-sticky lg:max-h-dvh overflow-y-auto beautify-scrollbar">
                     <x-pl-tree-sidebar />
                 </div>
             </div>
