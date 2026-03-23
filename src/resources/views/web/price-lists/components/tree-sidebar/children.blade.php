@@ -9,7 +9,8 @@
 
 @foreach($tree as $child)
     @if ($child["hasChildren"])
-        <li x-data="{ expanded: '{{ $useAnchors ? true : $child['expanded'] }}' }" class="">
+        @php($expandedValue = $useAnchors ? true : $child['expanded'])
+        <li x-data="{ expanded: '{{ $expandedValue }}' }" class="">
             <button type="button" @click="expanded = !expanded"
                     class="w-full flex items-center justify-between text-left cursor-pointer {{ $sizeClasses }} hover:text-primary-hover {{ $child['isActive'] ? 'text-primary' : '' }}">
                 <span>{{ $child["webTitle"] }}</span>
@@ -17,7 +18,7 @@
                     <x-tt::ico.arrow-down />
                 </span>
             </button>
-            <ul x-collapse x-show="expanded" class="ml-5 {{ $spacingClasses }}">
+            <ul x-collapse x-show="expanded" class="ml-5 {{ $spacingClasses }}" @if (!$expandedValue) style="display: none" @endif>
                 @include("pl::web.price-lists.components.tree-sidebar.children", ["tree" => $child["children"], "depth" => $depth + 1])
             </ul>
         </li>
