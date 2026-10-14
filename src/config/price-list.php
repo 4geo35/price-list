@@ -1,7 +1,7 @@
 <?php
 
 return [
-    // Web
+    // Settings
     "priceListPrefix" => "price-list",
     "priceListPageTitle" => "Прайс-лист",
     "useBreadcrumbs" => true,
@@ -13,21 +13,22 @@ return [
     "tablePriceTitle" => "Цена",
     "addToHeaderSize" => 2,
 
-    "customWebPriceListController" => null,
-
-    // Admin
+    // Models
     "customPriceListModel" => null,
     "customPriceListModelObserver" => null,
 
     "customPriceListItemModel" => null,
     "customPriceListItemModelObserver" => null,
 
+    // Controllers
+    "customWebPriceListController" => null,
+
     "customAdminPriceListController" => null,
 
     // Facades
     "customPriceListActionsManager" => null,
 
-    // Components
+    // Wire Components
     "customAminPriceListsListComponent" => null,
     "customAdminPriceListShowComponent" => null,
 

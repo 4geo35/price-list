@@ -162,7 +162,7 @@ trait PriceListEditActions
         $this->reset("title", "slug", "short", "accent", "description", "info", "priceListId", "parentId", "showNested");
     }
 
-    protected function checkAuth(string $action, PriceListInterface $list = null): bool
+    protected function checkAuth(string $action, ?PriceListInterface $list = null): bool
     {
         try {
             $priceListModelClass = config("price-list.customPriceListModel") ?? PriceList::class;
@@ -176,7 +176,7 @@ trait PriceListEditActions
         }
     }
 
-    protected function findModel(int $id = null): ?PriceListInterface
+    protected function findModel(?int $id = null): ?PriceListInterface
     {
         $priceListModelClass = config("price-list.customPriceListModel") ?? PriceList::class;
         if ($id) { $priceList = $priceListModelClass::find($id); }

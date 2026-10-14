@@ -24,7 +24,7 @@ class ListWire extends Component implements WireTreeInterface, WireTreePublishIn
         return view("pl::livewire.admin.price-lists.list-wire", compact("tree"));
     }
 
-    public function showCreate(int $parentId = null): void
+    public function showCreate(?int $parentId = null): void
     {
         $this->resetFields();
         if (! $this->checkAuth("create")) { return; }
